@@ -22,8 +22,16 @@ while True:
         else:
             seqL = seqL + seq[vp]
             vp += 1
+    #change Ns at start and end of seqL
+    if seqL[var_pos[0]-1] == 'N':
+        end_part = re.findall('N([ATGC]*$)',seqL[0:255])[0]
+        begin_len = length - len(end_part) - (length - 255)
+        seqL = 'N' * begin_len + end_part + seqL[255:]
+    if seqL[var_pos[-1]-1] == 'N':
+        start_part = re.findall('(^[ATGC]*)N',seqL[255:])[0]
+        end_len = length - len(start_part) - 255
+        seqL = seqL[0:255] + start_part + ('N' * end_len)
     #write to outfile
     out.write(line1)
     out.write(seqL+'\n')
 out.close()
-#print (var_dict)
