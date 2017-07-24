@@ -5,7 +5,6 @@ length = 658
 fname = 'fill_in_haplo.fas'
 handle = open(fname)
 out = open('filled_in_haplo.fas','w')
-var_dict = {}
 name = ''
 seq = ''
 while True:
@@ -23,6 +22,8 @@ while True:
         else:
             seqL = seqL + seq[vp]
             vp += 1
-    var_dict[name] = seqL
     #write to outfile
-print (var_dict)
+    out.write(line1)
+    out.write(seqL+'\n')
+out.close()
+#print (var_dict)
